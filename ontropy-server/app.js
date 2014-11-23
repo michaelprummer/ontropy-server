@@ -4,6 +4,34 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+
+//mongodb test
+
+mongoose.connect('mongodb://localhost');
+var Schema = mongoose.Schema
+  , ObjectId = Schema.ObjectId;
+
+var Level = new Schema({
+    name  :  { type: String, index: true }
+  , content   :  { type: String}
+});
+
+var Levels = mongoose.model('levels', Level);
+
+var instance = new Levels();
+instance.name = 'testname';
+instance.save(function (err) {
+});
+
+Levels.find({}, function (err, docs) {
+  console.log(docs);
+});
+
+
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
