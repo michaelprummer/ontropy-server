@@ -28,12 +28,6 @@ process.on('SIGINT', function() {
   });
 });
 
-var Level = require('./../model/level').Level;
-
-
-Level.find({}, function (err, docs) {
-  console.log(docs);
-});
 
 
 

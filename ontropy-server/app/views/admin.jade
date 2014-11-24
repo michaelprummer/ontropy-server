@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1= AdminPanel
+    p Admin
+
+    #wrapper
+        p data
+        h2 User List
+        #levels
+            table
+                thead
+                    tr
+                        th Name 
+                        th Content
+                tbody
+                    for level in levels
+                        tr
+                            td= level.name 
+                            td= level.content
