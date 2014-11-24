@@ -4,34 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 
-
-//mongodb test
-
-mongoose.connect('mongodb://localhost');
-var Schema = mongoose.Schema
-  , ObjectId = Schema.ObjectId;
-
-var Level = new Schema({
-    name  :  { type: String, index: true }
-  , content   :  { type: String}
-});
-
-var Levels = mongoose.model('levels', Level);
-
-var instance = new Levels();
-instance.name = 'testname';
-instance.save(function (err) {
-});
-
-Levels.find({}, function (err, docs) {
-  console.log(docs);
-});
-
-
-
-
+var db = require('./app/controllers/dbConnector');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -39,7 +13,7 @@ var users = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -61,7 +35,7 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
+ 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {

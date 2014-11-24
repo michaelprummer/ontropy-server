@@ -1,0 +1,18 @@
+var mongoose = require("mongoose");
+
+var LevelSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    index: true
+  },
+  content: {
+  	type: String,
+  	default: ''
+  }
+});
+
+var Level = mongoose.model('Level', LevelSchema);
+
+module.exports = {
+  Level: Level
+}
