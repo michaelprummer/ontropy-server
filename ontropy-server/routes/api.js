@@ -33,12 +33,8 @@ router.post('/create', function(req, res) {
 
 	//TODO: SANITIZE INPUT! 
 	var newLvl = req.body;
-	console.log(newLvl);
 
-	Level.create({
-			name : newLvl.name ,
-			content: newLvl.content
-		},
+	Level.create(newLvl,
 		function(err, elem) {
 			if (err) throw err;
 			//console.log("Saved level " + elem);
