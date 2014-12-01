@@ -89,7 +89,9 @@ DragNDropApp = function(io){
     this.focusOff = mouseUp;   //release circle when mouse moves off canvas
     io.canvas.addEventListener('mousedown', mouseDown);
     io.canvas.addEventListener('mousemove', mouseMove);
-    document.getElementById("btn").addEventListener("click", copyObj);
+    document.getElementById("copy").addEventListener("click", copyObj);
+    document.getElementById("save").addEventListener("click", saveLvl);
+
     //handles width slider
     document.getElementById("wForm").oninput =  function(event){
         handleSliderInput(event, "widthRange", "widthAmount");
@@ -139,6 +141,14 @@ DragNDropApp = function(io){
     /*
      * Helper Functions
      */
+    function saveLvl(event){
+        console.log("save pressed");
+        for (var i = 0; i<printedObs.length;i++){
+            var obj =  printedObs[i];
+            console.log(getIOSCodeForObject(obj, canvasCenter));
+        }
+    }
+
     function copyObj(event){
         if (selectedObjs.length > 0) {
             var objsToBeCopied = selectedObjs;
@@ -161,7 +171,6 @@ DragNDropApp = function(io){
                 printedObs.push(draggables[draggables.length-1]);
             }
         }
-        refreshTextarea();
     }
 
     function setElementDetails(){
@@ -180,7 +189,6 @@ DragNDropApp = function(io){
                 }
             }
         }
-	refreshTextarea();
     }
 
     function setWinCondition(){
@@ -189,16 +197,13 @@ DragNDropApp = function(io){
         if (winCondition.winCondition != 0) {
             printedObs.push(winCondition);
         }
-
-        refreshTextarea();
     }
 
     //handles the slider values
      //handleSliderInput(event, "widthRange", "widthAmount");
 
     function handleSliderInput(event, elemA, elemB) {
-
-        var id = event.srcElement.id;
+        var id = event.target.id;
         var firstElement = document.getElementById(elemA);
         var secondElement = document.getElementById(elemB);
         if (id == elemA) {
@@ -225,7 +230,6 @@ DragNDropApp = function(io){
 
             }
         }
-        refreshTextarea();
     }
 
     function resizeObject(event) {
@@ -236,7 +240,6 @@ DragNDropApp = function(io){
                 draggables[selectedObjs[i]].setSize(width.value,height.value);
             }
         }
-        refreshTextarea();
     }
 
     function getNextCell() {
@@ -355,7 +358,6 @@ DragNDropApp = function(io){
         }
 
         objsBeingDragged = [];
-        refreshTextarea()
         oldPos = -1;
         newPos = -1;
     }
@@ -364,26 +366,6 @@ DragNDropApp = function(io){
         var index = array.indexOf(obj);
         if (index > -1) {
         array.splice(index, 1);
-        }
-    }
-
-    function refreshTextarea(){
-        var output = ""
-        for (var i = 0; i<printedObs.length;i++){
-            var obj =  printedObs[i];
-            output +=  getIOSCodeForObject(obj, canvasCenter) + "\n";
-        }
-        //remove previous code
-        $("#container div" ).remove();
-        if (output != "") {
-            //create new textblock
-            var pre = $(document.createElement('pre'));
-                pre.attr("class","syntax brush-clang syntax-theme-modern replace")
-                    .attr("id","preblock")
-                    .text(output);
-           $("#container").append(pre);
-           //$("#preblock").text(output);
-            $.syntax({});
         }
     }
 
@@ -399,7 +381,6 @@ DragNDropApp = function(io){
                 document.getElementById("xValue").value = obj.pos.x;
                 document.getElementById("yValue").value = obj.pos.y;
             }
-            refreshTextarea();
         }
     }
 

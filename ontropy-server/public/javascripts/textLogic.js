@@ -1,5 +1,6 @@
 function getIOSCodeForObject(obj, canvasCenter){
-
+     
+    var colors = ["Black","Green","Blue","Red","Purple","Orange"];
     var scale = .5;
     var yOffset = 20; //Menubar
     //ORDER MUST BE ANALOGUE TO initializers[] in editorLogic.js
@@ -60,34 +61,23 @@ function getIOSCodeForObject(obj, canvasCenter){
         return output;
     }
 
-    function getCenterX() {
-         return parseInt(getX() - obj.width/2*scale);
-    }
-
-    function getCenterY(){
-        return parseInt(getY() - obj.height/2*scale);
-    }
-
     function createObstacleCode() {
-            var destructible =  (obj.isDestructable)? "Destructible" : "Solid";
-            var life = (obj.isDestructable)? getLifes(obj) : "";
-	    var colorType = (obj.isDestructable)? getColor(obj) : "";
+        var obst = {};
+        obst.isDestructible =  obj.isDestructable;
+        obst.lifes = (obj.isDestructable)? getLifes(obj) : 0;
+	    obst.colorType = (obj.isDestructable)? getColor(obj) : null;
+        obst.relX = getXOffset();               //offset value relative to center
+        obst.relY = getYOffset();               //offset value relative to center
+        obst.width = getWidth(obj);
+        obst.height = getHeight(obj);
 
-            var size = "CGSizeMake(" +getWidth(obj) + ", " + getHeight(obj) + ")"
-            return "[m spawnObstacle" + destructible + ":[Model rectWithPoint:"
-                                                                + "[m getCenterForSize: "
-                                                                    + size
-                                                                    + " withPadX:" + getXOffset()
-                                                                    + " padY:" + getYOffset()
-                                                                + "] andSize:" + size + "]"
-                                                            + colorType
-                                                            + life +"];"
+
+        return obst;
     }
 
     function getColor() {
         if (obj.colorIndex > -1){
-            var colors = ["Black","Green","Blue","Red","Purple","Orange"];
-            return " withColorType:kColor" + colors[obj.colorIndex];
+            return "kColor" + colors[obj.colorIndex];
         }else{
             return ""
         }
@@ -95,16 +85,6 @@ function getIOSCodeForObject(obj, canvasCenter){
     }
     function getLifes(obj){
         return " andLifes:4";
-    }
-
-    //TODO: use relativ positions
-    function getX() {
-        //compensate bigger screen
-        return Math.round((obj.pos.x - obj.width/2) * scale);
-    }
-
-    function getY() {
-        return Math.round((obj.pos.y - obj.height/2) * scale);
     }
 
     function getXOffset(){
