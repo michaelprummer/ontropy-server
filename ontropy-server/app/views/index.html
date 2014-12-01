@@ -1,0 +1,61 @@
+<!DOCTYPE html> <html>
+    <head>
+        <title>Ontropy Level Editor</title>
+        <meta charset="utf-8"> <meta name="product" content="ontropy editor"> <meta
+        name="description" content="A simple drag&drop editor for ontropy levels">
+        <meta name="author" content="Benjamin Sauer, Munich, Germany">
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body lang="en">
+        <div class='values'>
+            <form id="wForm" >
+                <p>
+                    <label for=widthRange>Width</label>
+                    <input type=range id="widthRange" min=1 value=10 max=1500 step=1>
+                    <input type="text" id="widthAmount" name="widthAmount" value=0></input>
+                </p>
+            </form>
+            <form id="hForm">
+                <p>
+                <label for=heigthRange>Height</label>
+                <input type=range id="heightRange" min=1 value=10 max=1500 step=1>
+                <input type="text" id="heightAmount" name="heightAmount" value=0 />
+                </p>
+            </form>
+            <label for=xValue>X:</label>
+            <input type="text" id="xValue" name="xValue" value=0 />
+            <label for=yValue>Y:</label>
+            <input type="text" id="yValue" name="yValue" value=0 />
+            <select id="winCondition" size="1">
+                <option value="0" selected>Points</option>
+                <option value="1">Destruction</option>
+            </select>
+            <form id="blockDetails">
+                <input type="checkbox" name="isDestructable" id="isDestructable" value="isDestructable">Destructable?
+                <select id="color" size="1">
+                    <option value="0" selected>Black</option>
+                    <option value="1">Green</option>
+                    <option value="2">Blue</option>
+                    <option value="3">Red</option>
+                    <option value="4">Purple</option>
+                    <option value="5">Orange</option>
+                </select>
+            </form>
+
+            <input type="button" id="btn" value='copy Object'/>
+
+        </div>
+        <div id="container" class ='centered' >
+            <canvas id="lvlCanvas" width="1436px" height="640px"></canvas>
+        </div>
+
+    </body>
+    <script type="text/javascript" src="jquery-2.1.1.js"></script>
+    <script src="syntax/public/jquery.syntax.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="iioEngine.min.js"></script>
+    <script type="text/javascript" src="textLogic.js"></script>
+    <script type="text/javascript" src="editorLogic.js"></script>
+
+
+</html>

@@ -18,14 +18,25 @@ router.get('/read', function(req, res) {
 router.get('/read/:lvlId', function(req, res) {
 
 	//TODO: SANITIZE INPUT! 
-	var lvlQuery = (req.params.lvlId != undefined) ? { "_id" : req.params.lvlId } : {} ;
+  	if (req.checkParams('lvlId', 'Invalid urlparam').isAlpha()){
+  		console.log("not alpha");
+  	}
+	var lvlId = req.params.lvlId;
+ 	req.sanitize('lvlId').toString();
 
-	Level.findOne(lvlQuery, function (err, docs) {
-		if (err) throw err;
-        res.contentType('application/json');
-        res.write(JSON.stringify(docs));
-        res.end();
-	});
+	if ( lvlId != undefined) {
+		//creates alphanumeric string from input
+		console.log(lvlId);
+		var lvlQuery = { "_id" : lvlId};
+	
+		//query db for lvl
+		Level.findOne(lvlQuery, function (err, docs) {
+			if (err) throw err;
+	        res.contentType('application/json');
+	        res.write(JSON.stringify(docs));
+	        res.end();
+		});
+	}
 });
 
 //save new level

@@ -1,0 +1,46 @@
+doctype html 5
+html
+head
+    title Ontropy Level Editor
+    meta(charset='utf-8')
+    meta(name='product', content='ontropy editor')
+    meta(name='description', content='A simple drag&drop editor for ontropy levels')
+    meta(name='author', content='Benjamin Sauer, Munich, Germany')
+    link(rel='stylesheet', href='stylesheets/ontropyedit.css')
+  body(lang='en')
+    .values
+      form#wForm
+        p
+          label(for='widthRange') Width
+          input#widthRange(type='range', min='1', value='10', max='1500', step='1')
+          input#widthAmount(type='text', name='widthAmount', value='0')
+      form#hForm
+        p
+          label(for='heigthRange') Height
+          input#heightRange(type='range', min='1', value='10', max='1500', step='1')
+          input#heightAmount(type='text', name='heightAmount', value='0')
+      label(for='xValue') X:
+      input#xValue(type='text', name='xValue', value='0')
+      label(for='yValue') Y:
+      input#yValue(type='text', name='yValue', value='0')
+      select#winCondition(size='1')
+        option(value='0', selected='selected') Points
+        option(value='1') Destruction
+      form#blockDetails
+        input#isDestructable(type='checkbox', name='isDestructable', value='isDestructable')
+        | Destructable?
+        select#color(size='1')
+          option(value='0', selected='selected') Black
+          option(value='1') Green
+          option(value='2') Blue
+          option(value='3') Red
+          option(value='4') Purple
+          option(value='5') Orange
+      input#btn(type='button', value='copy Object')
+    #container.centered
+      canvas#lvlCanvas(width='1436px', height='640px')
+  script(type='text/javascript', src='javascripts/jquery-2.1.1.js')
+  script(type='text/javascript', src='javascripts/jquery.syntax.min.js')
+  script(type='text/javascript', src='javascripts/iioEngine.min.js')
+  script(type='text/javascript', src='javascripts/textLogic.js')
+  script(type='text/javascript', src='javascripts/editorLogic.js')
