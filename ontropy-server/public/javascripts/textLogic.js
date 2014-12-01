@@ -76,12 +76,7 @@ function getIOSCodeForObject(obj, canvasCenter){
     }
 
     function getColor() {
-        if (obj.colorIndex > -1){
-            return "kColor" + colors[obj.colorIndex];
-        }else{
-            return ""
-        }
-
+        return "kColor" + colors[obj.colorIndex];
     }
     function getLifes(obj){
         return " andLifes:4";
