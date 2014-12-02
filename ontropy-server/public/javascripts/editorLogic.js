@@ -142,11 +142,21 @@ DragNDropApp = function(io){
      * Helper Functions
      */
     function saveLvl(event){
-        console.log("save pressed");
+        var lvl = {};
+        //todo, insert user chosen name
+        lvl.name = "lvl" +(new Date).getTime();
+        var content = [];
+        lvl.wincondition = printedObs.winCondition;
+
         for (var i = 0; i<printedObs.length;i++){
             var obj =  printedObs[i];
-            console.log(getIOSCodeForObject(obj, canvasCenter));
+            content.push(getIOSCodeForObject(obj, canvasCenter));
         }
+        lvl.content = content;
+        //lvl.content = JSON.stringify(content);
+        console.log("sending lvl to db");
+        console.log(lvl);
+        $.post( "/api/create", lvl);
     }
 
     function copyObj(event){

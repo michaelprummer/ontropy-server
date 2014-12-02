@@ -1,13 +1,14 @@
 var mongoose = require("mongoose");
 
+
 var LevelSchema = new mongoose.Schema({
   name: {
     type: String,
     index: true
   },
-  content: {
-  	type: String,
-  	default: ''
+  content: { 
+  	type : Array , 
+  	"default" : [] 
   }
 });
 

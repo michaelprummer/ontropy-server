@@ -62,7 +62,7 @@ function getIOSCodeForObject(obj, canvasCenter){
     }
 
     function createObstacleCode() {
-        var obst = {};
+        var obst = { objType : "fixedObstacle"};
         obst.isDestructible =  obj.isDestructable;
         obst.lifes = (obj.isDestructable)? getLifes(obj) : 0;
 	    obst.colorType = (obj.isDestructable)? getColor(obj) : null;
@@ -70,8 +70,6 @@ function getIOSCodeForObject(obj, canvasCenter){
         obst.relY = getYOffset();               //offset value relative to center
         obst.width = getWidth(obj);
         obst.height = getHeight(obj);
-
-
         return obst;
     }
 
