@@ -48,7 +48,6 @@ router.post('/create', function(req, res) {
 	Level.create(newLvl,
 		function(err, elem) {
 			if (err) throw err;
-			//console.log("Saved level " + elem);
 			res.contentType('application/json');
         	res.write(JSON.stringify(elem));
         	res.end();
