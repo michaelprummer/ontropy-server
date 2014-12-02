@@ -1,83 +1,88 @@
 function getIOSCodeForObject(obj, canvasCenter){
      
     var colors = ["Black","Green","Blue","Red","Purple","Orange"];
-    var scale = .5;
+    var scale = .5; //compensate screen size -> mobile device screen size
     var yOffset = 20; //Menubar
+
+    var basicObj = (obj.type < 99) ? createGameObjectPrototype() : {}; 
+
     //ORDER MUST BE ANALOGUE TO initializers[] in editorLogic.js
     switch (obj.type) {
         case 0: //obstacle block
-        {   return createObstacleCode();}
+        {   return createObstacle(createSimpleGameObj(basicObj,"fixedObstacle"))}
         case 1: //gravity Field
-        {   return "[m spawnGravityFieldAtPosition:" + getCenterPoint("gravityField") + "];"}
+        {   return createSimpleGameObj(basicObj,"gravityField")}
         case 2: //Black hole
-        {   return "[m spawnBlackholeAtPosition:" + getCenterPoint("blackhole") + " withBonusLevel:false];";}
+        {   return createSimpleGameObj(basicObj,"blackhole")}
         case 3: //portal_painter
-        {   return createCollectableString("kCollectablePortalPainter");}
+        {   return createCollectable(createSimpleGameObj(basicObj,"kCollectablePortalPainter"))} 
         case 4: //ballCanon
-        {   return "[m spawnBallCanon:" + getCenterPoint("ballCannon") + "];";}
+        {   return createSimpleGameObj(basicObj,"ballCannon")}
         case 5: //multiball
-        {   return createCollectableString("kCollectableMultipleBalls");}
+        {   return createCollectable(createSimpleGameObj(basicObj,"kCollectableMultipleBalls"))}
         case 6: //colBiggerBall
-        {   return createCollectableString("kCollectableBiggerBall");}
+        {   return createCollectable(createSimpleGameObj(basicObj,"kCollectableBiggerBall"))}
         case 7: //colSmallerBall
-        {   return createCollectableString("kCollectableSmallerBall");}
+        {   return createCollectable(createSimpleGameObj(basicObj,"kCollectableSmallerBall"))}
         case 8: //colPaddleBigger
-        {   return createCollectableString("kCollectableBiggerPaddle");}
+        {   return createCollectable(createSimpleGameObj(basicObj,"kCollectableBiggerPaddle"))}
         case 9: //colPaddleSmaller
-        {   return createCollectableString("kCollectableSmallerPaddle");}
+        {   return createCollectable(createSimpleGameObj(basicObj,"kCollectableSmallerPaddle"))}
         case 10: //colLive
-        {   return createCollectableString("kCollectableStar");}
+        {   return createCollectable(createSimpleGameObj(basicObj,"kCollectableStar"))}
         case 11: //Portal
-        {
-            // TODO html interface for in, out, axis
-            var outSide = " out:" + "portalOutBoth ";
-            var inSide  = "in:" + "portalInBoth ";
-            var axis  = "axis: " + "portalAxisStraight ";
-
-            return "[m spawnPortal:[m getCenterForSize:m.sizes.portalDefaultSize withPadX:"
-                                                    + getXOffset()
-                                                    + " padY:"+ getYOffset() + "] "
-                                                    + getColor()
-                                                    + outSide
-                                                    + inSide
-                                                    + axis + "];"
-     	}
+        {   return createPortal(createSimpleGameObj(basicObj, "portal"))}
         case 99: //colLive
         {   return getWinCondition()}
         default:
         { return "incorrect parameter"}
     }
 
+    /*
+     + creates a simple object with x and y offset
+     */
 
-    function getCenterPoint(sizeString){
-        return "[m getCenterForSize:m.sizes." + sizeString + "DefaultSize withPadX:" + getXOffset() + " padY:" + getYOffset() + "]";
+    function createGameObjectPrototype(){
+        var basicObj = {}
+        basicObj.relX = getXOffset();               //offset value relative to center
+        basicObj.relY = getYOffset();               //offset value relative to center
+        return basicObj;
+    }
+
+    /*
+     * Creates a playable game object by adding a type
+     */
+    function createSimpleGameObj(basicObj, typeName){
+        basicObj.objType  = typeName;
+        return basicObj;
+    }
+
+    function createObstacle(simpleGameObj) {
+        simpleGameObj.isDestructible =  obj.isDestructable;
+        //TODO: add life interface
+        simpleGameObj.lifes = (obj.isDestructable)? 4 : 0;
+        simpleGameObj.colorType = (obj.isDestructable)? getColor() : null;
+        simpleGameObj.width = getWidth(obj);
+        simpleGameObj.height = getHeight(obj);
+        return simpleGameObj;
+    }
+
+    function createPortal(simpleGameObj) {
+        // TODO html interface for in, out, axis
+        simpleGameObj.outSide = "portalOutBoth";
+        simpleGameObj.inSide = "portalInBoth";
+        simpleGameObj.axis = "portalAxisStraight";
+        simpleGameObj.colorType = getColor();
+        return simpleGameObj;
     }
 
     function getWinCondition(){
-        var output = (parseInt(obj.winCondition) == 1)
-            ? "m.isDestroyObstaclesToWin = YES;\n" +
-               "m.destroyObstacleWinType = kDestroyObstacleWinTypeAll;"
-            : "";
+        var output = {};
+        if (parseInt(obj.winCondition) == 1){
+            output.isDestroyObstaclesToWin = true;
+            output.destroyObstacleWinType = "kDestroyObstacleWinTypeAll";
+        }
         return output;
-    }
-
-    function createObstacleCode() {
-        var obst = { objType : "fixedObstacle"};
-        obst.isDestructible =  obj.isDestructable;
-        obst.lifes = (obj.isDestructable)? getLifes(obj) : 0;
-	    obst.colorType = (obj.isDestructable)? getColor(obj) : null;
-        obst.relX = getXOffset();               //offset value relative to center
-        obst.relY = getYOffset();               //offset value relative to center
-        obst.width = getWidth(obj);
-        obst.height = getHeight(obj);
-        return obst;
-    }
-
-    function getColor() {
-        return "kColor" + colors[obj.colorIndex];
-    }
-    function getLifes(obj){
-        return " andLifes:4";
     }
 
     function getXOffset(){
@@ -88,21 +93,22 @@ function getIOSCodeForObject(obj, canvasCenter){
         return Math.round(obj.pos.y  - canvasCenter.y - yOffset) * scale;
     }
 
+    //atm only used for fixed obstacles
     function getWidth() {
         return Math.round(obj.width * scale);
     }
 
+    function getColor(){
+        return colors[obj.colorIndex];
+    }
+
+    //atm only used for fixed obstacles
     function getHeight(height) {
         return Math.round(obj.height * scale);
     }
 
-    function createCollectableString(type,reactivationTime) {
-        var x =
-        reactivationTime = (typeof reactivationTime === "undefined") ? 0 : reactivationTime;
-        var str = "[m spawnCollectable:" +
-                   getCenterPoint("collectable") +
-                   " withType:"+ type +
-                   " reactivationTime:"+ reactivationTime +"];"
-        return str;
+    function createCollectable(simpleGameObj) {
+        //TODO ADD REACTIVATION TIME
+        return simpleGameObj;
     }
 }

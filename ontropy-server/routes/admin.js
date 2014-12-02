@@ -6,16 +6,6 @@ router.get('/', function(req, res) {
 
 	var Level = require('../app/model/level').Level;
 
-	/*
-		Level.create({
-	    name : "testREst",
-	    content: "123123123123",
-	  }, function(err, team) {
-	    console.log("dun goofd");
-	  });
-	*/
-
-
 	Level.find({}, function (err, docs) {
 
 		res.render("admin", {

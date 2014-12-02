@@ -154,7 +154,6 @@ DragNDropApp = function(io){
         }
         lvl.content = content;
         //lvl.content = JSON.stringify(content);
-        console.log("sending lvl to db");
         console.log(lvl);
         $.post( "/api/create", lvl);
     }
