@@ -1,13 +1,6 @@
-doctype html 5
-html
-head
-    title Ontropy Level Editor
-    meta(charset='utf-8')
-    meta(name='product', content='ontropy editor')
-    meta(name='description', content='A simple drag&drop editor for ontropy levels')
-    meta(name='author', content='Benjamin Sauer, Munich, Germany')
-    link(rel='stylesheet', href='stylesheets/ontropyedit.css')
-  body(lang='en')
+extends layout
+
+block content
     .values
       form#wForm
         p
@@ -38,8 +31,8 @@ head
           option(value='5') Orange
       input#copy(type='button', value='copy Object')
       input#save(type='button', value='saveLevel')
-    #container.centered
-      canvas#lvlCanvas(width='1436px', height='640px')
+    .container
+        canvas#lvlCanvas(width='1436px', height='640px')
     script(type='text/javascript', src='jquery/dist/jquery.min.js')
     script(type='text/javascript', src='iioengine/core/iioEngine.min.js')
     script(type='text/javascript', src='javascripts/editorLogic.js')

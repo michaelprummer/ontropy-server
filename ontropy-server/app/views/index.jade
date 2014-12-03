@@ -1,22 +1,29 @@
 extends layout
-extends layout
 
 block content
-    h1= title
-    p Welcome to our test
-
-    // Wrapper
-    #wrapper
-
-        // USER LIST
-        h2 User List
-        #userList
-            table
-                thead
-                    th UserName
-                    th Email
-                    th Delete?
-                tbody
-        // /USER LIST
-
-    // /WRAPPER
+    .site-wrapper
+      .site-wrapper-inner
+          .cover-container
+            .masthead.clearfix
+              .inner
+                h3.masthead-brand OntropyEdit
+                nav
+                  ul.nav.masthead-nav
+                    li.active
+                      a(href='#') Home
+                    li
+                      a(href='#') Features
+                    li
+                      a(href='#') Contact
+            .inner.cover
+              h1.cover-heading Cover your page.
+                       
+              p.lead
+                Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.
+              p.lead
+                a.btn.btn-lg.btn-default(href='#') Learn more
+            .mastfoot
+              .inner
+                p
+                  Cover Editor created for the iOs app 
+                  a(href='https://itunes.apple.com/us/app/ontropy/id923634669?mt=8') Ontropy

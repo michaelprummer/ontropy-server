@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "iioEngine": "1.2.x"
+    "bootstrap": "3.3.1",
+    "iioEngine": "1.2.2"
   }
 }
