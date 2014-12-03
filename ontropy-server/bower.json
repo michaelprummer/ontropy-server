@@ -1,0 +1,21 @@
+{
+  "name": "ontropy-server",
+  "version": "1.0.0",
+  "homepage": "https://github.com/michaelprummer/ontropy-server",
+  "authors": [
+    "Ben Sower <sauer.benjamin@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "iioEngine": "1.2.x"
+  }
+}
