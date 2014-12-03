@@ -1,4 +1,4 @@
-DragNDropApp = function(io){
+OntropyEdit = function(io){
 
     ////////////////////
     //CONSTANTS//
@@ -118,9 +118,6 @@ DragNDropApp = function(io){
     $('#yValue').on('input', function () {
         changeY(this);
     });
-
-
-
 
     $("body").keydown(function( event ) {
         //"Strg/ctrl is being pressed
@@ -393,4 +390,4 @@ DragNDropApp = function(io){
         }
     }
 
-}; iio.start(DragNDropApp, 'lvlCanvas')
+}; iio.start(OntropyEdit, 'lvlCanvas')

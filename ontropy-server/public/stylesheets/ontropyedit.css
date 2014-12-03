@@ -1,12 +1,13 @@
-html
-{
-    background-color: white;
-}
-
 #lvlCanvas {
-    height: 640px;
-    width: inherit;
     border: 1px solid black;
+    width: 1436px; 
+    height: 640px; 
+
+    position: absolute; 
+    top: 0; right: 0; 
+    bottom: 0; left: 0;
+    margin: auto; 
+
 }
 
 #output {
@@ -14,24 +15,5 @@ html
     width: inherit;
 }
 
-.centered{
-    width: 1436px;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    display: block;
-}
 
-.values{
-    position: absolute;
-    left: 1400px;
-    top: 420px;
-    width:300px;
-    height:200px;
-}
-.values input[type="text"] {
-    width:50px;
-}
 

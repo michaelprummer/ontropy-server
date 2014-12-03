@@ -1,29 +1,60 @@
 extends layout
 
 block content
-    .site-wrapper
-      .site-wrapper-inner
-          .cover-container
-            .masthead.clearfix
-              .inner
-                h3.masthead-brand OntropyEdit
-                nav
-                  ul.nav.masthead-nav
-                    li.active
-                      a(href='#') Home
-                    li
-                      a(href='#') Features
-                    li
-                      a(href='#') Contact
-            .inner.cover
-              h1.cover-heading Cover your page.
-                       
-              p.lead
-                Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.
-              p.lead
-                a.btn.btn-lg.btn-default(href='#') Learn more
-            .mastfoot
-              .inner
-                p
-                  Cover Editor created for the iOs app 
-                  a(href='https://itunes.apple.com/us/app/ontropy/id923634669?mt=8') Ontropy
+  .site-wrapper
+    .site-wrapper-inner
+        .cover-container
+          .masthead.clearfix
+            .inner
+              h3.masthead-brand OntropyEdit
+              nav
+                ul.nav.masthead-nav
+                  li.active
+                    a(href='#') Home
+                  li
+                    a(href='#') Features
+                  li
+                    a(href='#') Contact
+          .inner.cover
+              //
+                .values
+                  form#wForm
+                    p
+                      label(for='widthRange') Width
+                      input#widthRange(type='range', min='1', value='10', max='1500', step='1')
+                      input#widthAmount(type='text', name='widthAmount', value='0')
+                  form#hForm
+                    p
+                      label(for='heigthRange') Height
+                      input#heightRange(type='range', min='1', value='10', max='1500', step='1')
+                      input#heightAmount(type='text', name='heightAmount', value='0')
+                  label(for='xValue') X:
+                  input#xValue(type='text', name='xValue', value='0')
+                  label(for='yValue') Y:
+                  input#yValue(type='text', name='yValue', value='0')
+                  select#winCondition(size='1')
+                    option(value='0', selected='selected') Points
+                    option(value='1') Destruction
+                  form#blockDetails
+                    input#isDestructable(type='checkbox', name='isDestructable', value='isDestructable')
+                    | Destructable?
+                    select#color(size='1')
+                      option(value='0', selected='selected') Black
+                      option(value='1') Green
+                      option(value='2') Blue
+                      option(value='3') Red
+                      option(value='4') Purple
+                      option(value='5') Orange
+                  input#copy(type='button', value='copy Object')
+                  input#save(type='button', value='saveLevel')
+              canvas#lvlCanvas
+          .mastfoot
+            .inner
+              p
+                Cover Editor created for the iOs app 
+                a(href='https://itunes.apple.com/us/app/ontropy/id923634669?mt=8') Ontropy
+  //imports
+  script(type='text/javascript', src='jquery/dist/jquery.min.js')
+  script(type='text/javascript', src='iioengine/core/iioEngine.min.js')
+  script(type='text/javascript', src='javascripts/editorLogic.js')
+  script(type='text/javascript', src='javascripts/textLogic.js')
