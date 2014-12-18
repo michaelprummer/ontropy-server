@@ -10,9 +10,17 @@
 
 }
 
-#output {
-    height: 320px;
-    width: inherit;
+
+.values{
+    position: absolute;
+    left: 1200px;
+    top: 420px;
+    width:300px;
+    height:200px;
+    z-index: 2;
+}
+.values input[type="text"] {
+    width:50px;
 }
 
 

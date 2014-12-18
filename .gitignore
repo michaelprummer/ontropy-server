@@ -1,3 +1,5 @@
 node_modules/
 data/
 ontropy-server/npm-debug.log
+
+ontropy-server/bower_components/*

@@ -16,38 +16,39 @@ block content
                   li
                     a(href='#') Contact
           .inner.cover
-              //
-                .values
-                  form#wForm
-                    p
-                      label(for='widthRange') Width
-                      input#widthRange(type='range', min='1', value='10', max='1500', step='1')
-                      input#widthAmount(type='text', name='widthAmount', value='0')
-                  form#hForm
-                    p
-                      label(for='heigthRange') Height
-                      input#heightRange(type='range', min='1', value='10', max='1500', step='1')
-                      input#heightAmount(type='text', name='heightAmount', value='0')
-                  label(for='xValue') X:
-                  input#xValue(type='text', name='xValue', value='0')
-                  label(for='yValue') Y:
-                  input#yValue(type='text', name='yValue', value='0')
-                  select#winCondition(size='1')
-                    option(value='0', selected='selected') Points
-                    option(value='1') Destruction
-                  form#blockDetails
-                    input#isDestructable(type='checkbox', name='isDestructable', value='isDestructable')
-                    | Destructable?
-                    select#color(size='1')
-                      option(value='0', selected='selected') Black
-                      option(value='1') Green
-                      option(value='2') Blue
-                      option(value='3') Red
-                      option(value='4') Purple
-                      option(value='5') Orange
-                  input#copy(type='button', value='copy Object')
-                  input#save(type='button', value='saveLevel')
-              canvas#lvlCanvas
+              //  
+              .values
+                form#wForm
+                  p
+                    label(for='widthRange') Width
+                    input#widthRange(type='range', min='1', value='10', max='1500', step='1')
+                    input#widthAmount(type='text', name='widthAmount', value='0')
+                form#hForm
+                  p
+                    label(for='heigthRange') Height
+                    input#heightRange(type='range', min='1', value='10', max='1500', step='1')
+                    input#heightAmount(type='text', name='heightAmount', value='0')
+                label(for='xValue') X:
+                input#xValue(type='text', name='xValue', value='0')
+                label(for='yValue') Y:
+                input#yValue(type='text', name='yValue', value='0')
+                select#winCondition(size='1')
+                  option(value='0', selected='selected') Points
+                  option(value='1') Destruction
+                form#blockDetails
+                  input#isDestructable(type='checkbox', name='isDestructable', value='isDestructable')
+                  | Destructable?
+                  select#color(size='1')
+                    option(value='0', selected='selected') Black
+                    option(value='1') Green
+                    option(value='2') Blue
+                    option(value='3') Red
+                    option(value='4') Purple
+                    option(value='5') Orange
+                input#copy(type='button', value='copy Object')
+                input#save(type='button', value='saveLevel')
+              .container
+                canvas#lvlCanvas(width='1436px', height='640px')
           .mastfoot
             .inner
               p
@@ -55,6 +56,6 @@ block content
                 a(href='https://itunes.apple.com/us/app/ontropy/id923634669?mt=8') Ontropy
   //imports
   script(type='text/javascript', src='jquery/dist/jquery.min.js')
-  script(type='text/javascript', src='iioengine/core/iioEngine.min.js')
+  script(type='text/javascript', src='javascripts/iioEngine.min.js')
   script(type='text/javascript', src='javascripts/editorLogic.js')
   script(type='text/javascript', src='javascripts/textLogic.js')

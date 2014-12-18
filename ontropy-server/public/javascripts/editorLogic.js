@@ -67,7 +67,6 @@ OntropyEdit = function(io){
         function () { return addImageRect(imagePath + 'colPaddleSmaller.png',20,20)},
         function () { return addImageRect(imagePath + 'icon_star.png',18,18)},
         function () { return addImageRect(imagePath + 'portal.png',16,16)},
-
     ];
 
     initDraggables();
