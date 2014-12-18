@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 
-var dbURI = 'mongodb://localhost';
+var dbURI = 'mongodb://heroku_app32633631:fekhfveb31b4rv82gpminbe10i@ds027751.mongolab.com:27751/heroku_app32633631';
 //mongodb test
 mongoose.connect(dbURI);
 
